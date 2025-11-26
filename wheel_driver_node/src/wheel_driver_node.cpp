@@ -12,8 +12,18 @@ M0602CDriver::M0602CDriver(const std::string& port, uint32_t baudrate) {
     try {
         ser_.setPort(port);
         ser_.setBaudrate(baudrate);
-        serial::Timeout timeout = serial::Timeout::simpleTimeout(22);
+        serial::Timeout timeout = serial::Timeout(
+                serial::Timeout::max(),  // 读取最大等待时间
+                100,                     // 读取每字节间隔
+                0,                       // 写入最大等待时间
+                0,                       // 写入每字节间隔
+                0                        // 多字节间隔
+            );
         ser_.setTimeout(timeout);
+        ser_.setBytesize(serial::eightbits);
+        ser_.setParity(serial::parity_none);
+        ser_.setStopbits(serial::stopbits_one);
+        ser_.setFlowcontrol(serial::flowcontrol_none);
         ser_.open();
     } catch (const std::exception& e) {
         throw std::runtime_error("无法打开串口: " + std::string(e.what()));
@@ -28,13 +38,19 @@ M0602CDriver::~M0602CDriver() {
 
 uint8_t M0602CDriver::crc8(const std::vector<uint8_t>& data) {
     uint8_t crc = 0;
-    for (uint8_t byte : data) {
+    for (const auto& byte : data) {  // 使用auto避免类型问题
         crc = CRC8_TABLE[crc ^ byte];
     }
     return crc;
 }
 
 void M0602CDriver::sendCommand(const std::vector<uint8_t>& tx) {
+    //     std::cout << "发送数据包: ";
+    // for (size_t i = 0; i < tx.size(); ++i) {
+    //     std::cout << std::hex << std::setw(2) << std::setfill('0') 
+    //               << static_cast<int>(tx[i]) << " ";
+    // }
+    // std::cout << std::dec << std::endl;
     std::lock_guard<std::recursive_mutex> emergency_lock(emergency_mutex_);
     if (emergency_state_) {
         throw std::runtime_error("急停激活中，命令被拒绝");
@@ -60,7 +76,8 @@ void M0602CDriver::emergencyStop() {
             0x00,
             0
         };
-        tx[9] = crc8(tx);
+        std::vector<uint8_t> data_for_crc(tx.begin(), tx.begin() + 9);  // 只取前9字节
+        tx[9] = crc8(data_for_crc);  // ✅ 正确：只计算前9字节
         ser_.write(tx);
     }
     std::this_thread::sleep_for(50ms);
@@ -109,9 +126,10 @@ void M0602CDriver::sendMotorCommand(uint8_t motor_id, int16_t value, uint8_t acc
         0,
         0
     };
-    tx[9] = crc8(tx);
+    std::vector<uint8_t> data_for_crc(tx.begin(), tx.begin() + 9);  // 只取前9字节
+    tx[9] = crc8(data_for_crc);  // ✅ 正确：只计算前9字节
     sendCommand(tx);
-    RCLCPP_INFO(rclcpp::get_logger("M0602CDriver"), "brake=%s", brake ? "true" : "false");
+    // RCLCPP_INFO(rclcpp::get_logger("M0602CDriver"), "brake=%s", brake ? "true" : "false");
 }
 
 void M0602CDriver::setMotorMode(uint8_t motor_id, MotorMode mode) {
@@ -123,15 +141,29 @@ void M0602CDriver::setMotorMode(uint8_t motor_id, MotorMode mode) {
 
 M0602CDriver::MotorStatus M0602CDriver::getMotorState(uint8_t motor_id) {
     std::vector<uint8_t> tx = {motor_id, 0x74, 0, 0, 0, 0, 0, 0, 0, 0};
-    tx[9] = crc8(tx);
-    
+    std::vector<uint8_t> data_for_crc(tx.begin(), tx.begin() + 9);  // 只取前9字节
+    tx[9] = crc8(data_for_crc);  // ✅ 正确：只计算前9字节
+    // std::cout << "\n🔍 查询电机状态命令分析:" << std::endl;
+    // std::cout << "数据包长度: " << tx.size() << " 字节" << std::endl;
+    // std::cout << "十六进制: ";
+    // for (size_t i = 0; i < tx.size(); ++i) {
+    //     printf("%02X ", tx[i]);
+    // }
+    std::cout << std::endl;
     std::lock_guard<std::mutex> lock(serial_mutex_);
     ser_.flushInput();
     ser_.write(tx);
-    
+
+
     std::vector<uint8_t> rx(10);
-    size_t bytes_read = ser_.read(rx, 10);
-    
+    size_t bytes_read = ser_.read(rx.data(), rx.size());  // ✅ 正确
+    // 打印读取的字节数和数据
+    // std::cout << "读取到 " << bytes_read << " 字节: ";
+    // for (size_t i = 0; i < bytes_read; ++i) {
+    //     std::cout << std::hex << std::setw(2) << std::setfill('0') 
+    //             << static_cast<int>(rx[i]) << " ";
+    // }
+    // std::cout << std::dec << std::endl;
     MotorStatus status;
     if (bytes_read != 10) {
         return status;
@@ -301,54 +333,95 @@ void M0602CNode::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg) 
     auto [left, right] = calculateWheelSpeeds(msg->linear.x, msg->angular.z);
     driver_->controlDualMotors(left, -right);
     
-    RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 100, 
-                        "速度指令: 左=%.3f m/s, 右=%.3f m/s", left, right);
+    // RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 100, 
+    //                     "速度指令: 左=%.3f m/s, 右=%.3f m/s", left, right);
 }
 
 void M0602CNode::publishOdometry() {
-    auto current_time = this->now();
-    double dt = (current_time - last_time_).seconds();
-    
-    double delta_x = vx_ * std::cos(th_) * dt;
-    double delta_y = vx_ * std::sin(th_) * dt;
-    double delta_th = vth_ * dt;
-    
-    x_ += delta_x;
-    y_ += delta_y;
-    th_ += delta_th;
-    last_time_ = current_time;
-    
-    // 发布TF变换
-    geometry_msgs::msg::TransformStamped t;
-    t.header.stamp = current_time;
-    t.header.frame_id = "odom";
-    t.child_frame_id = "base_footprint";
-    t.transform.translation.x = x_;
-    t.transform.translation.y = y_;
-    t.transform.translation.z = 0.0;
-    
-    tf2::Quaternion q;
-    q.setRPY(0, 0, th_);
-    t.transform.rotation.x = q.x();
-    t.transform.rotation.y = q.y();
-    t.transform.rotation.z = q.z();
-    t.transform.rotation.w = q.w();
-    
-    tf_broadcaster_->sendTransform(t);
-    
-    // 发布里程计
-    auto odom = std::make_unique<nav_msgs::msg::Odometry>();
-    odom->header = t.header;
-    odom->child_frame_id = "base_footprint";
-    odom->pose.pose.position.x = x_;
-    odom->pose.pose.position.y = y_;
-    odom->pose.pose.orientation = t.transform.rotation;
-    odom->twist.twist.linear.x = vx_;
-    odom->twist.twist.angular.z = vth_;
-    
-    odom_pub_->publish(std::move(odom));
+    try {
+        auto current_time = this->now();
+        double dt = (current_time - last_time_).nanoseconds()/1e9;
+        // std::cout << "当前时间: " << current_time.seconds() << "秒" << std::endl;
+        // std::cout << "dt_ns = " << dt << std::endl; 
+        // 检查时间有效性
+        // if (dt <= 0 || dt > 1.0) {  // 时间差太大可能是异常
+        //     last_time_ = current_time;
+        //     return;
+        // }
+        
+        // 积分计算位置
+        double delta_x = vx_ * std::cos(th_) * dt;
+        double delta_y = vx_ * std::sin(th_) * dt;
+        double delta_th = vth_ * dt;
+        std::cout << "vx_ = " << vx_ << std::endl; 
+        x_ += delta_x;
+        y_ += delta_y;
+        th_ += delta_th;
+        
+        // 规范化角度
+        while (th_ > M_PI) th_ -= 2.0 * M_PI;
+        while (th_ < -M_PI) th_ += 2.0 * M_PI;
+        
+        last_time_ = current_time;
+        
+        // 发布TF变换
+        geometry_msgs::msg::TransformStamped odom_trans;
+        odom_trans.header.stamp = current_time;
+        odom_trans.header.frame_id = "odom";
+        odom_trans.child_frame_id = "base_footprint";
+        
+        odom_trans.transform.translation.x = x_;
+        odom_trans.transform.translation.y = y_;
+        odom_trans.transform.translation.z = 0.0;
+        
+        tf2::Quaternion q;
+        q.setRPY(0, 0, th_);
+        odom_trans.transform.rotation.x = q.x();
+        odom_trans.transform.rotation.y = q.y();
+        odom_trans.transform.rotation.z = q.z();
+        odom_trans.transform.rotation.w = q.w();
+        
+        // 发送TF
+        tf_broadcaster_->sendTransform(odom_trans);
+        
+        // 发布里程计消息
+        auto odom_msg = std::make_unique<nav_msgs::msg::Odometry>();
+        odom_msg->header.stamp = current_time;
+        odom_msg->header.frame_id = "odom";
+        odom_msg->child_frame_id = "base_footprint";
+        
+        // 位置
+        odom_msg->pose.pose.position.x = x_;
+        odom_msg->pose.pose.position.y = y_;
+        odom_msg->pose.pose.position.z = 0.0;
+        odom_msg->pose.pose.orientation.x = q.x();
+        odom_msg->pose.pose.orientation.y = q.y();
+        odom_msg->pose.pose.orientation.z = q.z();
+        odom_msg->pose.pose.orientation.w = q.w();
+        
+        // 速度
+        odom_msg->twist.twist.linear.x = vx_;
+        odom_msg->twist.twist.linear.y = 0.0;
+        odom_msg->twist.twist.linear.z = 0.0;
+        odom_msg->twist.twist.angular.x = 0.0;
+        odom_msg->twist.twist.angular.y = 0.0;
+        odom_msg->twist.twist.angular.z = vth_;
+        
+        // 发布里程计
+        odom_pub_->publish(std::move(odom_msg));
+        
+        // 调试输出
+        static int odom_count = 0;
+        if (odom_count++ % 50 == 0) {  // 每50次发布打印一次
+            RCLCPP_INFO(this->get_logger(), 
+                       "里程计发布: 位置(%.2f, %.2f, %.2f) 速度(%.2f, %.2f)", 
+                       x_, y_, th_, vx_, vth_);
+        }
+        
+    } catch (const std::exception& e) {
+        RCLCPP_ERROR(this->get_logger(), "里程计发布异常: %s", e.what());
+    }
 }
-
 void M0602CNode::handleEmergencyStop(const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
                                     std::shared_ptr<std_srvs::srv::Trigger::Response> response) {
     try {

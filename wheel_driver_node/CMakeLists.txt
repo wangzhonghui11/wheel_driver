@@ -17,7 +17,7 @@ find_package(tf2 REQUIRED)
 find_package(serial REQUIRED)
 
 add_executable(wheel_driver_node 
-  wheel_driver_node.cpp
+  src/wheel_driver_node.cpp
 )
 
 ament_target_dependencies(wheel_driver_node
@@ -42,4 +42,8 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
+
+# 安装启动文件（如果有）
+install(DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+)
