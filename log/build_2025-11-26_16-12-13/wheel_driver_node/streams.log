@@ -1,0 +1,23 @@
+[0.011s] Invoking command in '/home/wang/wheel_driver/build/wheel_driver_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wang/Downloads/bimax_arm_control-v1.0/install/robot_tools:/home/wang/Downloads/bimax_arm_control-v1.0/install/controller_test:/opt/ros/humble /usr/bin/cmake --build /home/wang/wheel_driver/build/wheel_driver_node -- -j12 -l12
+[0.081s] [35m[1mConsolidate compiler generated dependencies of target wheel_driver_node[0m
+[0.101s] [100%] Built target wheel_driver_node
+[0.115s] Invoked command in '/home/wang/wheel_driver/build/wheel_driver_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wang/Downloads/bimax_arm_control-v1.0/install/robot_tools:/home/wang/Downloads/bimax_arm_control-v1.0/install/controller_test:/opt/ros/humble /usr/bin/cmake --build /home/wang/wheel_driver/build/wheel_driver_node -- -j12 -l12
+[0.128s] Invoking command in '/home/wang/wheel_driver/build/wheel_driver_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wang/Downloads/bimax_arm_control-v1.0/install/robot_tools:/home/wang/Downloads/bimax_arm_control-v1.0/install/controller_test:/opt/ros/humble /usr/bin/cmake --install /home/wang/wheel_driver/build/wheel_driver_node
+[0.138s] -- Install configuration: ""
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/lib/wheel_driver_node/wheel_driver_node
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/package_run_dependencies/wheel_driver_node
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/parent_prefix_path/wheel_driver_node
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/ament_prefix_path.sh
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/ament_prefix_path.dsv
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/path.sh
+[0.138s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/path.dsv
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.bash
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.sh
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.zsh
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.dsv
+[0.139s] -- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/package.dsv
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/packages/wheel_driver_node
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/cmake/wheel_driver_nodeConfig.cmake
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/cmake/wheel_driver_nodeConfig-version.cmake
+[0.139s] -- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/package.xml
+[0.142s] Invoked command in '/home/wang/wheel_driver/build/wheel_driver_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wang/Downloads/bimax_arm_control-v1.0/install/robot_tools:/home/wang/Downloads/bimax_arm_control-v1.0/install/controller_test:/opt/ros/humble /usr/bin/cmake --install /home/wang/wheel_driver/build/wheel_driver_node

@@ -1,0 +1,19 @@
+[35m[1mConsolidate compiler generated dependencies of target wheel_driver_node[0m
+[100%] Built target wheel_driver_node
+-- Install configuration: ""
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/lib/wheel_driver_node/wheel_driver_node
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/package_run_dependencies/wheel_driver_node
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/parent_prefix_path/wheel_driver_node
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/ament_prefix_path.sh
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/path.sh
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/path.dsv
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.bash
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.sh
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.zsh
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.dsv
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/package.dsv
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/packages/wheel_driver_node
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/cmake/wheel_driver_nodeConfig.cmake
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/cmake/wheel_driver_nodeConfig-version.cmake
+-- Up-to-date: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/package.xml

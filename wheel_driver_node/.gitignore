@@ -1,0 +1,47 @@
+# ---------------------------
+# ROS 2 全系列忽略规则
+# ---------------------------
+# Colcon构建系统
+**/build/
+**/install/
+**/log/
+
+# Catkin遗留文件（兼容混合工作区）
+**/devel/
+**/build_isolated/
+**/devel_isolated/
+**/install_isolated/
+
+# 包配置文件
+**/.catkin_workspace
+**/AMENT_IGNORE
+**/CATKIN_IGNORE
+**/COLCON_IGNORE
+
+# ---------------------------
+# 开发工具链
+# ---------------------------
+# IDE
+**/.vscode/
+**/.idea/
+**/*.code-workspace
+
+# 编辑器临时文件
+**/*.swp
+**/*.swo
+**/*~
+**/.#*
+
+# ---------------------------
+# 语言相关
+# ---------------------------
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+
+# C/C++
+**/*.o
+**/*.a
+**/*.la
+**/*.lo

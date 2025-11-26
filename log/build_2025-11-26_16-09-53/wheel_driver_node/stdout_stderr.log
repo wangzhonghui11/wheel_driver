@@ -1,0 +1,91 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found rclcpp: 16.0.12 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+-- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+-- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+-- Found serial: 1.2.1 (/usr/local/share/serial/cmake)
+-- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: 
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Configured cpplint exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/wang/wheel_driver/build/wheel_driver_node
+[ 50%] [32mBuilding CXX object CMakeFiles/wheel_driver_node.dir/wheel_driver_node.cpp.o[0m
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CDriver::controlMotor(uint8_t, int16_t, M0602CDriver::MotorMode, uint8_t, bool)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:74:76:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmode[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   74 | void M0602CDriver::controlMotor(uint8_t motor_id, int16_t value, [01;35m[KMotorMode mode[m[K,
+      |                                                                  [01;35m[K~~~~~~~~~~^~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CDriver::forceControlMotor(uint8_t, int16_t, M0602CDriver::MotorMode, uint8_t, bool)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:95:81:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmode[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   95 | void M0602CDriver::forceControlMotor(uint8_t motor_id, int16_t value, [01;35m[KMotorMode mode[m[K,
+      |                                                                       [01;35m[K~~~~~~~~~~^~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CDriver::sendMotorCommand(uint8_t, int16_t, uint8_t, bool)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:108:15:[m[K [01;35m[Kwarning: [m[Knarrowing conversion of ‘[01m[K(brake ? 255 : 0)[m[K’ from ‘[01m[Kint[m[K’ to ‘[01m[Kunsigned char[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnarrowing-Wnarrowing]8;;[m[K]
+  108 |         [01;35m[Kbrake ? 0xFF : 0[m[K,
+      |         [01;35m[K~~~~~~^~~~~~~~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:108:15:[m[K [01;35m[Kwarning: [m[Knarrowing conversion of ‘[01m[K(brake ? 255 : 0)[m[K’ from ‘[01m[Kint[m[K’ to ‘[01m[Kunsigned char[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnarrowing-Wnarrowing]8;;[m[K]
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CNode::handleEmergencyStop(std::shared_ptr<std_srvs::srv::Trigger_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::Trigger_Response_<std::allocator<void> > >)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:352:93:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Krequest[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  352 | void M0602CNode::handleEmergencyStop([01;35m[Kconst std::shared_ptr<std_srvs::srv::Trigger::Request> request[m[K,
+      |                                      [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CNode::handleEmergencyReset(std::shared_ptr<std_srvs::srv::Trigger_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::Trigger_Response_<std::allocator<void> > >)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:375:94:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Krequest[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  375 | void M0602CNode::handleEmergencyReset([01;35m[Kconst std::shared_ptr<std_srvs::srv::Trigger::Request> request[m[K,
+      |                                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[100%] [32m[1mLinking CXX executable wheel_driver_node[0m
+[100%] Built target wheel_driver_node
+-- Install configuration: ""
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/lib/wheel_driver_node/wheel_driver_node
+-- Set runtime path of "/home/wang/wheel_driver/install/wheel_driver_node/lib/wheel_driver_node/wheel_driver_node" to ""
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/package_run_dependencies/wheel_driver_node
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/parent_prefix_path/wheel_driver_node
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/ament_prefix_path.sh
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/ament_prefix_path.dsv
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/path.sh
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/environment/path.dsv
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.bash
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.sh
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.zsh
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/local_setup.dsv
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/package.dsv
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/ament_index/resource_index/packages/wheel_driver_node
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/cmake/wheel_driver_nodeConfig.cmake
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/cmake/wheel_driver_nodeConfig-version.cmake
+-- Installing: /home/wang/wheel_driver/install/wheel_driver_node/share/wheel_driver_node/package.xml

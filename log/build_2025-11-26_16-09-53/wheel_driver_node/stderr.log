@@ -1,0 +1,21 @@
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CDriver::controlMotor(uint8_t, int16_t, M0602CDriver::MotorMode, uint8_t, bool)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:74:76:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmode[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   74 | void M0602CDriver::controlMotor(uint8_t motor_id, int16_t value, [01;35m[KMotorMode mode[m[K,
+      |                                                                  [01;35m[K~~~~~~~~~~^~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CDriver::forceControlMotor(uint8_t, int16_t, M0602CDriver::MotorMode, uint8_t, bool)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:95:81:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmode[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   95 | void M0602CDriver::forceControlMotor(uint8_t motor_id, int16_t value, [01;35m[KMotorMode mode[m[K,
+      |                                                                       [01;35m[K~~~~~~~~~~^~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CDriver::sendMotorCommand(uint8_t, int16_t, uint8_t, bool)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:108:15:[m[K [01;35m[Kwarning: [m[Knarrowing conversion of ‘[01m[K(brake ? 255 : 0)[m[K’ from ‘[01m[Kint[m[K’ to ‘[01m[Kunsigned char[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnarrowing-Wnarrowing]8;;[m[K]
+  108 |         [01;35m[Kbrake ? 0xFF : 0[m[K,
+      |         [01;35m[K~~~~~~^~~~~~~~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:108:15:[m[K [01;35m[Kwarning: [m[Knarrowing conversion of ‘[01m[K(brake ? 255 : 0)[m[K’ from ‘[01m[Kint[m[K’ to ‘[01m[Kunsigned char[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnarrowing-Wnarrowing]8;;[m[K]
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CNode::handleEmergencyStop(std::shared_ptr<std_srvs::srv::Trigger_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::Trigger_Response_<std::allocator<void> > >)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:352:93:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Krequest[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  352 | void M0602CNode::handleEmergencyStop([01;35m[Kconst std::shared_ptr<std_srvs::srv::Trigger::Request> request[m[K,
+      |                                      [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:[m[K In member function ‘[01m[Kvoid M0602CNode::handleEmergencyReset(std::shared_ptr<std_srvs::srv::Trigger_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::Trigger_Response_<std::allocator<void> > >)[m[K’:
+[01m[K/home/wang/wheel_driver/wheel_driver_node/wheel_driver_node.cpp:375:94:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Krequest[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  375 | void M0602CNode::handleEmergencyReset([01;35m[Kconst std::shared_ptr<std_srvs::srv::Trigger::Request> request[m[K,
+      |                                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
